@@ -26,8 +26,8 @@ class Clock extends React.Component {
     const date = this.state.time.toDateString()
     return (
       <div>
-        <h1 class="widget-title">Clock</h1>
-        <div class="clock-div">
+        <h1 className="widget-title">Clock</h1>
+        <div className="clock-div">
           <div>
             <h1>Time:</h1>
             <h1>Date:</h1>
