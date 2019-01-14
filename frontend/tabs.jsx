@@ -1,52 +1,44 @@
 import React from 'react'
 
 const Headers = (props) => {
-  const headers = props.panes.map((pane, index) => {
-    const title = pane.title;
-    return (
-      <li 
-        key={index}
-        onClick={()=> props.onTabChosen(index)}>
-        <h1>{title}</h1>
-      </li>
-    );
-  });
-  return (
-    <ul>
-      {headers}
-    </ul>
-  );
+  
+  const lis = props.panes.map((ele, idx) => {
+    return <li key={idx} onClick={ () => props.changeSelect(idx)}>{ele.title}</li>
+  })
+  return lis 
 }
-
 
 class Tabs extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      selectedPane: 0
+      selected: 0
     }
-    this.selectTab = this.selectTab.bind(this);
+    this.changeSelected = this.changeSelected.bind(this)
   }
 
-  selectTab(num){
-    this.setState({selectedPane: num})
-  }
+  changeSelected(num){
+    this.setState({
+      selected: num
+    })
+  } 
+
+
 
   render(){
-    const pane = this.props.panes[this.state.selectedPane]
-
     return (
       <div>
-        <h1>Tabs</h1>
-        <Headers 
-          onTabChosen={this.selectTab}
-          panes={this.props.panes}>
-        </Headers>  
+        <h1 className="widget-title">Tabs!!</h1>
+        <div className="tabs-div">
+        <ul>
+          <Headers panes={this.props.panes} changeSelect={this.changeSelected}/>
+        </ul>
         <article>
-          {pane.content}
+         {this.props.panes[this.state.selected].content}
         </article>
       </div>
-    );
+    </div>  
+    )
   }
 }
 
